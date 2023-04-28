@@ -28,6 +28,7 @@ import {
   CHANGE_PAGE,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
+  GET_GLOBAL_JOBS
 } from './actions';
 
 import { initialState } from './appContext';
@@ -101,6 +102,16 @@ const reducer = (state, action) => {
       alertText: 'User Profile Updated!',
     };
   }
+  if(action.type === GET_GLOBAL_JOBS){
+    return {
+      ...state,
+      status: 'declined',
+      isLoading: false,
+      jobs: action.payload.jobs,
+      totalJobs: action.payload.totalJobs,
+      numOfPages: action.payload.numOfPages,
+    }
+  }
   if (action.type === UPDATE_USER_ERROR) {
     return {
       ...state,
@@ -158,6 +169,7 @@ const reducer = (state, action) => {
   if (action.type === GET_JOBS_BEGIN) {
     return { ...state, isLoading: true, showAlert: false };
   }
+
   if (action.type === GET_JOBS_SUCCESS) {
     return {
       ...state,

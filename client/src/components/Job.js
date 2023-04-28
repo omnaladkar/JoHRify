@@ -50,6 +50,13 @@ const Job = ({
             >
               Delete
             </button>
+            <button
+              type='button'
+              className='btn'
+              onClick={() => deleteJob(_id)}
+            >
+              Share
+            </button>
           </div>
         </footer>
       </div>

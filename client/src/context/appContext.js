@@ -32,6 +32,7 @@ import {
   CHANGE_PAGE,
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
+  GET_GLOBAL_JOBS
 } from './actions';
 
 const initialState = {
@@ -180,6 +181,27 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+  const globaljobs = async () =>{
+    let url  =  `/all/alljobs`;
+    //dispatch({ type: GET_JOBS_BEGIN });
+    try {
+      const { data } = await authFetch(url);
+      console.log(data)
+      const { jobs, totalJobs, numOfPages } = data;
+      dispatch({
+        type: GET_GLOBAL_JOBS,
+        payload: {
+          jobs,
+          totalJobs,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      logoutUser();
+    }
+    clearAlert();
+
+  }
 
   const getJobs = async () => {
     const { page, search, searchStatus, searchType, sort } = state;
@@ -307,6 +329,7 @@ const AppProvider = ({ children }) => {
         showStats,
         clearFilters,
         changePage,
+        globaljobs
       }}
     >
       {children}

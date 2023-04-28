@@ -8,6 +8,13 @@ import {
 import checkPermissions from '../utils/checkPermissions.js';
 import mongoose from 'mongoose';
 import moment from 'moment';
+
+const allJobs = async(req,res) => {
+  const jobs = await Job.find({ status: 'declined' })
+  res.status(StatusCodes.OK).json({ jobs, count: jobs.length })
+  res.send("bhel wlaa mai")
+  console.log("bhel wla adi")
+}
 const createJob = async (req, res) => {
   const { position, company } = req.body;
 
@@ -153,4 +160,4 @@ const showStats = async (req, res) => {
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
 
-export { createJob, deleteJob, getAllJobs, updateJob, showStats };
+export { createJob, deleteJob, getAllJobs, updateJob, showStats,allJobs };

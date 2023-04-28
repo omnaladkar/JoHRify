@@ -40,9 +40,9 @@ app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
 app.use(cookieParser());
-
+app.use('/api/v1/all', jobsRouter);
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/jobs', authenticateUser, jobsRouter);
+app.use('/api/v1/jobs', authenticateUser,jobsRouter);
 
 // only when ready to deploy
 app.get('*', (req, res) => {
@@ -52,7 +52,7 @@ app.get('*', (req, res) => {
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const start = async () => {
   try {
